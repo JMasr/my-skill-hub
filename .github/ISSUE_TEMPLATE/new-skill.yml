@@ -1,0 +1,46 @@
+name: New skill proposal
+description: Propose a new skill to add to the hub
+labels: ["new-skill"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before opening this issue, verify that the skill does not already exist in the registry.
+        Proposals that cannot point to a concrete, recurring problem are unlikely to be accepted.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe a specific recurring task that is currently tedious or error-prone.
+      placeholder: "When I do X on projects of type Y, I always have to Z manually. This is error-prone because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Proposed workflow
+      description: High-level description of the phases or steps the skill would follow.
+    validations:
+      required: true
+
+  - type: textarea
+    id: triggers
+    attributes:
+      label: Trigger phrases
+      description: What would a user say to Claude to activate this skill? List 3-5 specific phrases.
+      placeholder: |
+        - "run the migration checks"
+        - "verify the schema is consistent"
+    validations:
+      required: true
+
+  - type: input
+    id: project-type
+    attributes:
+      label: Target project type
+      description: What kind of projects would use this skill?
+      placeholder: "Python libraries, FastAPI services, React apps, ..."
+    validations:
+      required: true

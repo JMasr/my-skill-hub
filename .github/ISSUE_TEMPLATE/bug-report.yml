@@ -1,0 +1,45 @@
+name: Bug report
+description: Report a problem with an existing skill
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Which skill?
+      options:
+        - py-doc-updater
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What went wrong?
+      description: Describe the incorrect behavior. Include the phase (if applicable) where it failed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: What should have happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: |
+        What trigger phrase or action caused the problem?
+        What was the state of the project (size, structure, git history)?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Environment
+      description: Claude Code version, OS, Python version if a script was involved.
