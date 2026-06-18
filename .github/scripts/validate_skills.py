@@ -20,7 +20,6 @@ import re
 import sys
 from pathlib import Path
 
-
 # Directories that are never skill directories.
 _SKIP_DIRS = {
     ".git",
@@ -68,9 +67,7 @@ _DESC_INLINE_RE = re.compile(r"^description\s*:\s*(\S.+)$", re.MULTILINE)
 _KEBAB_RE = re.compile(r"^[a-z][a-z0-9-]*$")
 # Naming convention: {scope}-{domain}-{action}[-{variant}]
 # Three parts required; fourth is optional and free-form (no approved list).
-_NAMING_RE = re.compile(
-    r"^[a-z][a-z0-9]+-[a-z][a-z0-9]+-[a-z][a-z0-9]+(?:-[a-z][a-z0-9]+)?$"
-)
+_NAMING_RE = re.compile(r"^[a-z][a-z0-9]+-[a-z][a-z0-9]+-[a-z][a-z0-9]+(?:-[a-z][a-z0-9]+)?$")
 
 # Approved scope, domain, and action tags (from README § Naming convention).
 _APPROVED_SCOPES = {
@@ -192,7 +189,7 @@ def check_for_placeholders(text: str, skill: str, location: str) -> list[Error]:
 
 
 def validate_directory_name(skill_name: str) -> list[Error]:
-    """Check that the skill directory follows the {scope}-{domain}-{action}[-{variant}] convention."""
+    """Check the directory follows the {scope}-{domain}-{action}[-{variant}] convention."""
     errors = []
 
     if not _NAMING_RE.match(skill_name):
@@ -201,7 +198,8 @@ def validate_directory_name(skill_name: str) -> list[Error]:
                 skill_name,
                 f"directory name '{skill_name}' must follow "
                 f"{{scope}}-{{domain}}-{{action}}[-{{variant}}] "
-                f"(3 required parts + optional variant, e.g. py-doc-updater or py-test-generator-unit)",
+                f"(3 required parts + optional variant, "
+                f"e.g. py-doc-updater or py-test-generator-unit)",
             )
         )
         return errors  # Parts cannot be checked if the structure is wrong
@@ -246,33 +244,26 @@ def validate_skill_md(skill_dir: Path) -> list[Error]:
     # Frontmatter presence
     fm = parse_frontmatter(content)
     if fm is None:
-        errors.append(
-            Error(skill_name, "SKILL.md: missing frontmatter (---...--- block)")
-        )
+        errors.append(Error(skill_name, "SKILL.md: missing frontmatter (---...--- block)"))
         return errors  # Cannot validate further without frontmatter
 
     # name field
     if "name" not in fm:
         errors.append(Error(skill_name, "SKILL.md: frontmatter missing 'name' field"))
     elif not _KEBAB_RE.match(fm["name"]):
-        errors.append(
-            Error(
-                skill_name, f"SKILL.md: 'name' must be kebab-case, got '{fm['name']}'"
-            )
-        )
+        errors.append(Error(skill_name, f"SKILL.md: 'name' must be kebab-case, got '{fm['name']}'"))
 
     # description field
     if "description" not in fm:
-        errors.append(
-            Error(skill_name, "SKILL.md: frontmatter missing 'description' field")
-        )
+        errors.append(Error(skill_name, "SKILL.md: frontmatter missing 'description' field"))
     else:
         desc = fm["description"]
         if len(desc) < MIN_DESCRIPTION_CHARS:
             errors.append(
                 Error(
                     skill_name,
-                    f"SKILL.md: 'description' is {len(desc)} chars, minimum is {MIN_DESCRIPTION_CHARS}",
+                    f"SKILL.md: 'description' is {len(desc)} chars, "
+                    f"minimum is {MIN_DESCRIPTION_CHARS}",
                 )
             )
         errors.extend(check_for_slop(desc, skill_name, "SKILL.md description"))
@@ -330,9 +321,7 @@ def validate_skill(skill_dir: Path) -> list[Error]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Validate skill directories in the hub."
-    )
+    parser = argparse.ArgumentParser(description="Validate skill directories in the hub.")
     parser.add_argument("--root", type=Path, default=Path("."), help="Repository root.")
     args = parser.parse_args()
 
