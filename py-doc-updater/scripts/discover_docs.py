@@ -295,15 +295,11 @@ def identify_gaps(inventory: DocInventory) -> list[str]:
     if not any(p.startswith("README") for p in root_paths):
         gaps.append("No README file found — this is critical for any project.")
 
-    if not any(
-        "CHANGELOG" in p or "CHANGES" in p or "HISTORY" in p for p in root_paths
-    ):
+    if not any("CHANGELOG" in p or "CHANGES" in p or "HISTORY" in p for p in root_paths):
         gaps.append("No CHANGELOG/CHANGES/HISTORY file found.")
 
     if not any("CONTRIBUTING" in p for p in root_paths):
-        gaps.append(
-            "No CONTRIBUTING file found (recommended for open-source projects)."
-        )
+        gaps.append("No CONTRIBUTING file found (recommended for open-source projects).")
 
     # Check for empty docs
     for doc in inventory.root_docs:
@@ -312,9 +308,7 @@ def identify_gaps(inventory: DocInventory) -> list[str]:
 
     # Check for missing doc directories
     if not inventory.doc_directories:
-        gaps.append(
-            "No docs/ directory found — consider adding structured documentation."
-        )
+        gaps.append("No docs/ directory found — consider adding structured documentation.")
 
     # Check docstring coverage
     for cov in inventory.docstring_coverage:

@@ -22,7 +22,6 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 # --- Conventional commit parsing ---
 
 # Matches: "type(scope): message" or "type: message" or "type!: message"
@@ -430,7 +429,7 @@ def detect_api_changes(repo_root: Path, reference: str) -> list[PublicAPIChange]
 
             for node in ast.iter_child_nodes(tree):
                 if isinstance(
-                    node, (ast.FunctionDef, ast.AsyncFunctionDef)
+                    node, ast.FunctionDef | ast.AsyncFunctionDef
                 ) and not node.name.startswith("_"):
                     changes.append(
                         PublicAPIChange(
@@ -506,7 +505,7 @@ def _extract_public_symbols_typed(source: str) -> dict[str, str]:
 
     symbols: dict[str, str] = {}
     for node in ast.iter_child_nodes(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        if isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef):
             if not node.name.startswith("_"):
                 symbols[node.name] = "function"
         elif isinstance(node, ast.ClassDef):
@@ -537,9 +536,7 @@ def build_report(
     breaking = [c.to_dict() for c in commits if c.is_breaking]
 
     # Extract doc-touching commits
-    doc_commits = [
-        c.to_dict() for c in commits if any(_is_doc_file(f) for f in c.files_changed)
-    ]
+    doc_commits = [c.to_dict() for c in commits if any(_is_doc_file(f) for f in c.files_changed)]
 
     # Author stats
     author_counts: dict[str, int] = {}
@@ -632,9 +629,7 @@ def format_table(report: AnalysisReport) -> str:
     return "\n".join(lines)
 
 
-def resolve_reference(
-    repo_root: Path, args: argparse.Namespace
-) -> tuple[str, list[str]]:
+def resolve_reference(repo_root: Path, args: argparse.Namespace) -> tuple[str, list[str]]:
     """Resolve the reference point into git log arguments."""
     if args.since_ref:
         ref = args.since_ref
