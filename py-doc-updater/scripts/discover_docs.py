@@ -16,11 +16,11 @@ import ast
 import json
 import sys
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 
-class DocStatus(str, Enum):
+class DocStatus(StrEnum):
     PRESENT = "present"
     EMPTY = "empty"
     MISSING = "missing"
