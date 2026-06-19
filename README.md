@@ -16,6 +16,7 @@ The `SKILL.md` tells Claude where to find them; adjust `<skill-path>` to the act
 
 | Skill | What it does | Trigger phrases |
 |-------|-------------|-----------------|
+| [git-sprint-start](git-sprint-start/SKILL.md) | Pre-flight check and branch setup for starting a new work session: reads CONTRIBUTING.md conventions, collects full repo state via a diagnostic script, reports findings, and — after explicit confirmation — fetches, updates, and creates a typed branch from the default branch | "start a new sprint", "new branch", "prepare repo for work", "start session", "pre-flight check", "is my repo clean?", "ready to start working" |
 | [py-doc-updater](py-doc-updater/SKILL.md) | Inspect a Python repo's git history and existing docs, then update documentation and generate changelogs | "update docs", "generate changelog", "what docs are outdated", "sync docs with code", "write release notes" |
 
 ## Naming convention
@@ -57,6 +58,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `ci` | CI/CD pipelines |
 | `db` | Databases and schemas |
 | `sec` | Security |
+| `sprint` | Sprint and session management |
 | `deps` | Dependencies and package management |
 | `types` | Type system |
 | `perf` | Performance |
@@ -78,6 +80,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `migrator` | Converts between formats or versions |
 | `builder` | Builds or compiles artifacts |
 | `reporter` | Produces structured reports |
+| `start` | Initialises a new session, workflow, or branch from a known-good baseline |
 
 ### Rules
 
