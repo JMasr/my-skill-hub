@@ -92,6 +92,7 @@ _APPROVED_DOMAINS = {
     "ci",
     "db",
     "sec",
+    "sprint",
     "deps",
     "types",
     "perf",
@@ -110,6 +111,7 @@ _APPROVED_ACTIONS = {
     "migrator",
     "builder",
     "reporter",
+    "start",
 }
 
 MIN_DESCRIPTION_CHARS = 80
