@@ -18,6 +18,7 @@ The `SKILL.md` tells Claude where to find them; adjust `<skill-path>` to the act
 |-------|-------------|-----------------|
 | [git-sprint-start](git-sprint-start/SKILL.md) | Pre-flight check and branch setup for starting a new work session: reads CONTRIBUTING.md conventions, collects full repo state via a diagnostic script, reports findings, and — after explicit confirmation — fetches, updates, and creates a typed branch from the default branch | "start a new sprint", "new branch", "prepare repo for work", "start session", "pre-flight check", "is my repo clean?", "ready to start working" |
 | [py-doc-updater](py-doc-updater/SKILL.md) | Inspect a Python repo's git history and existing docs, then update documentation and generate changelogs | "update docs", "generate changelog", "what docs are outdated", "sync docs with code", "write release notes" |
+| [gh-pm-manager](gh-pm-manager/SKILL.md) | Acts as a Project Manager over multi-repo GitHub Projects v2: creates and organizes issues, grooms the backlog, prioritizes by ROI, estimates effort, and reports progress — never touches code | "gestión de proyecto", "crear issues", "planificar sprint", "backlog", "prioridades", "roadmap", "estado del proyecto" |
 
 ## Naming convention
 
@@ -59,6 +60,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `db` | Databases and schemas |
 | `sec` | Security |
 | `sprint` | Sprint and session management |
+| `pm` | Project management (issues, backlog, roadmap) |
 | `deps` | Dependencies and package management |
 | `types` | Type system |
 | `perf` | Performance |
@@ -80,6 +82,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `migrator` | Converts between formats or versions |
 | `builder` | Builds or compiles artifacts |
 | `reporter` | Produces structured reports |
+| `manager` | Orchestrates an ongoing process (plans, tracks, coordinates) without producing code |
 | `start` | Initialises a new session, workflow, or branch from a known-good baseline |
 
 ### Rules
@@ -99,6 +102,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `py-deps-checker` | Audit Python dependency health |
 | `ts-api-reviewer` | Review TypeScript API design |
 | `gh-ci-checker` | Validate GitHub Actions configuration |
+| `gh-pm-manager` | Manage a GitHub Projects v2 backlog |
 | `sql-db-migrator` | Generate SQL migration scripts |
 | `gen-sec-scanner` | Scan for security issues in any language |
 | `git-adr-generator` | Generate ADRs from git history |

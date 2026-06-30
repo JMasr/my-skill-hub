@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Agents local guidance — never commit
+CLAUDE.md
+AGENT.md
+AGENTS.md

@@ -93,6 +93,7 @@ _APPROVED_DOMAINS = {
     "db",
     "sec",
     "sprint",
+    "pm",
     "deps",
     "types",
     "perf",
@@ -111,6 +112,7 @@ _APPROVED_ACTIONS = {
     "migrator",
     "builder",
     "reporter",
+    "manager",
     "start",
 }
 
