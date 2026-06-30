@@ -1,0 +1,29 @@
+# Guard "a main solo desde develop" para .gitlab-ci.yml
+#
+# GitLab NO tiene un ajuste nativo para restringir el branch de ORIGEN de un MR
+# hacia un branch protegido. Este job lo fuerza en CI: falla cualquier MR cuyo
+# destino sea `main` y cuyo origen NO sea `develop`.
+#
+# Requisitos para que se ejecute en pipelines de MR:
+#   1) `workflow.rules` debe permitir merge_request_event (ver bloque abajo).
+#   2) Si usas `image:`, asegúrate de que haya un runner Docker (tag docker).
+#
+# Integra estos dos bloques en tu .gitlab-ci.yml.
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS && $CI_PIPELINE_SOURCE == "push"'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH'
+    - if: '$CI_COMMIT_TAG'
+
+enforce-develop-to-main:
+  stage: guard          # añade 'guard' como primer stage en tu lista de stages
+  before_script: []
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main" && $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME != "develop"'
+      when: always
+  script:
+    - 'echo "Bloqueado: a main solo se permite mergear desde develop."'
+    - exit 1

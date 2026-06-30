@@ -19,6 +19,7 @@ The `SKILL.md` tells Claude where to find them; adjust `<skill-path>` to the act
 | [git-sprint-start](git-sprint-start/SKILL.md) | Pre-flight check and branch setup for starting a new work session: reads CONTRIBUTING.md conventions, collects full repo state via a diagnostic script, reports findings, and — after explicit confirmation — fetches, updates, and creates a typed branch from the default branch | "start a new sprint", "new branch", "prepare repo for work", "start session", "pre-flight check", "is my repo clean?", "ready to start working" |
 | [py-doc-updater](py-doc-updater/SKILL.md) | Inspect a Python repo's git history and existing docs, then update documentation and generate changelogs | "update docs", "generate changelog", "what docs are outdated", "sync docs with code", "write release notes" |
 | [gh-pm-manager](gh-pm-manager/SKILL.md) | Acts as a Project Manager over multi-repo GitHub Projects v2: creates and organizes issues, grooms the backlog, prioritizes by ROI, estimates effort, and reports progress — never touches code | "gestión de proyecto", "crear issues", "planificar sprint", "backlog", "prioridades", "roadmap", "estado del proyecto" |
+| [gl-pm-manager](gl-pm-manager/SKILL.md) | Acts as a Project Manager over GitLab via the `glab` CLI: Issues, milestones, labels, Merge Requests, pipelines and tagged releases under a GitFlow model, plus consistent commit/MR/release messages | "planificar sprint en GitLab", "crear issues", "milestone", "abrir merge request", "esperar pipeline", "cortar release", "mergear" |
 
 ## Naming convention
 
@@ -44,6 +45,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `sql` | SQL and relational databases |
 | `git` | Git operations |
 | `gh` | GitHub (issues, PRs, Actions) |
+| `gl` | GitLab (issues, MRs, pipelines) |
 | `docker` | Docker and containers |
 | `k8s` | Kubernetes |
 | `tf` | Terraform / infrastructure-as-code |
@@ -103,6 +105,7 @@ The fourth part is **optional** — use it only when two skills share the same t
 | `ts-api-reviewer` | Review TypeScript API design |
 | `gh-ci-checker` | Validate GitHub Actions configuration |
 | `gh-pm-manager` | Manage a GitHub Projects v2 backlog |
+| `gl-pm-manager` | Manage GitLab sprints, MRs, and releases |
 | `sql-db-migrator` | Generate SQL migration scripts |
 | `gen-sec-scanner` | Scan for security issues in any language |
 | `git-adr-generator` | Generate ADRs from git history |

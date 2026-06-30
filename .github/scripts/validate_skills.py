@@ -80,6 +80,7 @@ _APPROVED_SCOPES = {
     "sql",
     "git",
     "gh",
+    "gl",
     "docker",
     "k8s",
     "tf",
