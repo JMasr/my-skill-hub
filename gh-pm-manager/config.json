@@ -1,0 +1,81 @@
+{
+  "owner": "JMasr",
+  "repos": [
+    "kernel-frontend",
+    "kernel-backend",
+    "kernel-infra"
+  ],
+  "project": {
+    "title": "Kernel SaaS",
+    "number": 4,
+    "id": "PVT_kwHOAfEVWs4BbQY2"
+  },
+  "fields": {
+    "status": {
+      "id": "PVTSSF_lAHOAfEVWs4BbQY2zhWCK5M",
+      "options": {
+        "Todo": "f75ad846",
+        "In Progress": "47fc9ee4",
+        "Done": "98236657",
+        "In Develop": "132e3053"
+      }
+    },
+    "prioridad": {
+      "id": "PVTSSF_lAHOAfEVWs4BbQY2zhWCLOE",
+      "options": {
+        "Alta": "7514c684",
+        "Media": "d6c03180",
+        "Baja": "eb226b3d"
+      }
+    },
+    "estimacion": {
+      "id": "PVTSSF_lAHOAfEVWs4BbQY2zhWCLOI",
+      "options": {
+        "XS": "1ccd24fe",
+        "S": "01d48fe0",
+        "M": "af7bfcc2",
+        "L": "4f6cc97c",
+        "XL": "d6864e04"
+      }
+    },
+    "tipo": {
+      "id": "PVTSSF_lAHOAfEVWs4BbQY2zhWCLOM",
+      "options": {
+        "feature": "198030fe",
+        "bug": "dee0897d",
+        "chore": "38100cfb",
+        "tech-debt": "247da326",
+        "docs": "70d2f676",
+        "discovery": "0c25fa65"
+      }
+    },
+    "sprint": {
+      "id": "PVTSSF_lAHOAfEVWs4BbQY2zhWCLOQ",
+      "options": {
+        "Sprint 1": "28b50ae7",
+        "Sprint 2": "25c88c3e",
+        "Sprint 3": "de3962c2",
+        "Sprint 4": "7bff6419",
+        "Sprint 5": "aca51f98",
+        "Sprint 6": "8a83c42c",
+        "Sprint 7": "70633411",
+        "Sprint 8": "b5819381",
+        "Sprint 9": "83e56e15",
+        "Sprint 10": "09fe0100"
+      }
+    }
+  },
+  "defaults": {
+    "status": "Todo",
+    "prioridad": "Media",
+    "estimacion": "M",
+    "tipo": "feature",
+    "sprint": null
+  },
+  "sync_labels": {
+    "kernel-frontend": "sync:frontend",
+    "kernel-backend": "sync:backend",
+    "kernel-infra": "sync:infra"
+  },
+  "language": "es"
+}
