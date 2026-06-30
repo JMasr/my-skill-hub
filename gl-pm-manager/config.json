@@ -1,0 +1,39 @@
+{
+  "_comment": "Configuración genérica de gl-pm-manager. El proyecto se autodetecta desde el remote git del repo actual; no se hardcodea owner/repo. Ajusta convenciones aquí.",
+  "host": "auto",
+  "remote": "origin",
+  "branch_model": {
+    "integration": "develop",
+    "release": "main",
+    "release_only_from_integration": true,
+    "feature_branches_base": "develop"
+  },
+  "labels": {
+    "feature": { "color": "#eee600", "description": "Nueva característica", "branch_prefix": "feature" },
+    "fix":     { "color": "#dc143c", "description": "Corrección de un error/bug", "branch_prefix": "fix" },
+    "task":    { "color": "#e6e6fa", "description": "Chore técnico, bootstrap, refactor o mantenimiento", "branch_prefix": "chore" },
+    "docs":    { "color": "#6699cc", "description": "Cambios documentales sin impacto de código", "branch_prefix": "docs" },
+    "deploy":  { "color": "#009966", "description": "CI/CD, compose, contenedores, systemd o despliegue", "branch_prefix": "ci" }
+  },
+  "message_style": {
+    "no_authorship_signature": true,
+    "concise_direct": true,
+    "associate_milestone": true,
+    "close_issue_from_mr": true,
+    "language": "es"
+  },
+  "defaults": {
+    "label": "task",
+    "weight_scale": { "XS": 1, "S": 2, "M": 3, "L": 5, "XL": 8 }
+  },
+  "pipeline": {
+    "require_green_before_merge": true,
+    "poll_interval_seconds": 15,
+    "poll_max_minutes": 20
+  },
+  "release": {
+    "tag_scheme": "semver",
+    "ref": "main",
+    "warn_milestone_autoclose": true
+  }
+}
