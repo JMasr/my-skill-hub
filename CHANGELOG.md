@@ -14,6 +14,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 - `gl-pm-manager`: `mr-new` now pushes the source branch to the configured remote — and verifies it exists there — before creating the MR, aborting if the push fails. Previously the branch could be missing from the remote, producing an MR with no SHA and false merge conflicts.
+- `gl-pm-manager`: `pipeline-watch` now retries for a few seconds while the MR pipeline is still being created, instead of reporting "Sin pipeline" on the first empty poll. Prevents a false "no pipeline" result immediately after opening an MR.
 
 ## [0.1.0] - 2026-06-18
 

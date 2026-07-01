@@ -181,8 +181,14 @@ cmd_pipeline_watch() {
   local mr_iid="${1:?Uso: pipeline-watch <mr-iid>}"
   local interval max; interval="$(cfg '.pipeline.poll_interval_seconds')"; max="$(cfg '.pipeline.poll_max_minutes')"
   [ "$interval" = "null" ] && interval=15; [ "$max" = "null" ] && max=20
-  local pid; pid="$(api "projects/$ENC_PATH/merge_requests/$mr_iid/pipelines" | jq -r '.[0].id // empty')"
-  [ -n "$pid" ] || { echo "Sin pipeline para MR !$mr_iid."; return 0; }
+  # El pipeline de MR puede tardar unos segundos en crearse tras abrir el MR.
+  local pid="" tries=0
+  while [ "$tries" -lt 10 ]; do
+    pid="$(api "projects/$ENC_PATH/merge_requests/$mr_iid/pipelines" | jq -r '.[0].id // empty')"
+    [ -n "$pid" ] && break
+    sleep 5; tries=$((tries + 1))
+  done
+  [ -n "$pid" ] || { echo "Sin pipeline para MR !$mr_iid tras espera."; return 0; }
   echo "Pipeline $pid (MR !$mr_iid)..."
   local elapsed=0 st
   while [ "$elapsed" -lt "$((max*60))" ]; do
