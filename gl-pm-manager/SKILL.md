@@ -187,6 +187,10 @@ afectan el orden). No crees Issues hasta tener confirmación.
 
 ## Aprendizajes a aplicar (lecciones del bootstrap real)
 
+- `mr-new` **empuja la rama de origen al remote antes de crear el MR** y aborta
+  si el push falla: una rama que solo existe en local produce un MR sin SHA y con
+  conflictos falsos. `branch-for` crea la rama rastreando la de integración, por
+  lo que su primer push al remote ocurre en `mr-new`.
 - Las **Issues pueden venir deshabilitadas** en el proyecto; habilítalas
   (`ensure-branch-model` lo hace) antes de crearlas.
 - Sin **runner** habilitado los pipelines quedan `pending`: revísalo en `topology`

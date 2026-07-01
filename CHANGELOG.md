@@ -12,6 +12,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Naming-convention vocabulary: `sprint` domain (sprint and session management) and `start` action (initialises a session/branch from a clean baseline); `gl` scope (GitLab), `pm` domain (project management) and `manager` action (orchestrates an ongoing process without producing code).
 - Ignore agent-guidance files (`CLAUDE.md`, `AGENT.md`, `AGENTS.md`) so they are never committed.
 
+### Fixed
+- `gl-pm-manager`: `mr-new` now pushes the source branch to the configured remote — and verifies it exists there — before creating the MR, aborting if the push fails. Previously the branch could be missing from the remote, producing an MR with no SHA and false merge conflicts.
+
 ## [0.1.0] - 2026-06-18
 
 ### Added

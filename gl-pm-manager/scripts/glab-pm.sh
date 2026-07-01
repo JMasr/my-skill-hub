@@ -20,9 +20,9 @@ done
 cfg() { jq -r "$1" "$CONFIG_FILE" 2>/dev/null; }
 
 _resolve_project() {
-  local remote; remote="$(cfg '.remote')"; [ "$remote" = "null" ] && remote="origin"
-  local url; url="$(git remote get-url "$remote" 2>/dev/null || true)"
-  [ -n "$url" ] || { echo "ERROR: remote '$remote' no encontrado." >&2; exit 1; }
+  REMOTE="$(cfg '.remote')"; [ "$REMOTE" = "null" ] && REMOTE="origin"
+  local url; url="$(git remote get-url "$REMOTE" 2>/dev/null || true)"
+  [ -n "$url" ] || { echo "ERROR: remote '$REMOTE' no encontrado." >&2; exit 1; }
   url="${url%.git}"
   case "$url" in
     git@*:*)            HOST="${url#git@}"; HOST="${HOST%%:*}"; PROJECT_PATH="${url#*:}" ;;
@@ -154,6 +154,23 @@ cmd_mr_new() {
   [ -n "$closes" ] && desc="${desc}
 
 Closes #${closes}"
+  # La rama de origen DEBE existir en el remote antes de crear el MR. Si no,
+  # GitLab crea el MR sin SHA y con "conflictos" falsos. `branch-for` deja la
+  # rama local rastreando <remote>/<integración>, así que su primer push ocurre
+  # aquí. Si el push falla, abortamos: crear el MR igual reproduce el bug.
+  if git show-ref --verify --quiet "refs/heads/$src"; then
+    echo "Empujando rama de origen '$src' a $REMOTE..."
+    git push -u "$REMOTE" "$src" || {
+      echo "ERROR: no se pudo empujar '$src' a $REMOTE; no se crea el MR." >&2
+      exit 1
+    }
+  fi
+  # Verifica que la rama exista realmente en el remote (cubre un src que no es
+  # rama local pero que debería estar ya publicado).
+  if ! git ls-remote --exit-code --heads "$REMOTE" "$src" >/dev/null 2>&1; then
+    echo "ERROR: la rama '$src' no existe en $REMOTE; créala/empújala antes de mr-new." >&2
+    exit 1
+  fi
   glab mr create --source-branch "$src" --target-branch "$tgt" \
     --title "$title" --description "$desc" \
     --milestone "$ms" --label "$label" --remove-source-branch --yes
